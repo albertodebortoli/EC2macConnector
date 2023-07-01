@@ -13,6 +13,7 @@ swift build -c release --arch arm64 --arch x86_64
 and copy the executable to a folder in your `$PATH` such as `/usr/local/bin/`.
 
 > **Note**
+> 
 > Once built, the executable can be found in the `.build` folder, usually at `.build/apple/Products/Release`. 
 
 Alternatively, you can download a release from the [list of releases]().
@@ -24,7 +25,7 @@ Alternatively, you can download a release from the [list of releases]().
 
 Both commands require AWS credentials either set as environment variables (`AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`) or configured in `~/.aws/credentials` via the [AWS CLI](https://aws.amazon.com/cli/). Environment variables take precedence.
 
-The user should have the following policies attached:
+The user must be granted the following permissions:
 
 - `ec2:DescribeInstances`
 - `secretsmanager:ListSecrets`
@@ -33,15 +34,16 @@ The user should have the following policies attached:
 ### EC2 instances
 
 The EC2 mac instances must have the `EC2macConnector:FleetIndex` tag set to the index of the instance in the fleet. Indexes should start at 1.
-Instances the don't have the said tag will be ignored.
+Instances that don't have the said tag will be ignored.
 
 
 ### Secrets and key pairs formats
 
 EC2macConnector assumes that the private key for each instance key pair is stored in SecretsManagers. The name of the key pair could and should be different from the secret ID.
 For example, the instance key pair should include an incremental number also part of the corresponding secret ID.
+
 Consider that the number of mac instances in an AWS account is limited and it's convenient to refer to them using an index starting at 1.
-It's good practice for the secret ID to also include a nonce as secrets with the same name cannot be recreated before the deletion period has elapsed; this allows quick provisioning-decommissioning cycles.
+It's good practice for the secret ID to also include a nonce as secrets with the same name cannot be recreated before the deletion period has elapsed, allowing quick provisioning-decommissioning cycles.
 
 For the above reasons, EC2macConnector assumes the following formats are used:
 
@@ -70,17 +72,18 @@ Optionally use the `--verbose` flag to inspect where the private keys and config
 
 #### Connect
 
-Connect to instance 5 over SSH:
+Connect to instance with index 5 over SSH:
 
 ```
 ec2macConnector connect 5 --region eu-west-1
 ```
 
-Connect to instance 5 over VNC:
+Connect to instance with index 5 over VNC:
 
 ```
 ec2macConnector connect 5 --region eu-west-1 --vnc
 ```
 
 > **Note**
-> Connecting over VNC requires an SSH to be first established.
+> 
+> Connecting over VNC requires an SSH session to be established first.
