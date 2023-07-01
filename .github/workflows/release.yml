@@ -6,12 +6,11 @@ on:
       - '*'
 
 env:
-    RUNNER: 'macos-12'
-    XCODE_VERSION: '14.2.0'
+  XCODE_VERSION: '14.2.0'
 
 jobs:
   build:
-    runs-on: ${{ env.RUNNER }}
+    runs-on: 'macos-12'
     strategy:
       fail-fast: false
     steps:
