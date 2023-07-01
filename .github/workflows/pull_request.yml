@@ -1,0 +1,39 @@
+name: Pull Request
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - '**'
+
+env:
+    RUNNER: 'macos-12'
+    XCODE_VERSION: '14.2.0'
+
+jobs:
+  build:
+    runs-on: ${{ env.RUNNER }}
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Select Xcode version
+        run: sudo xcode-select -s /Applications/Xcode_${{ env.XCODE_VERSION }}.app/Contents/Developer
+      - name: Show macOS version
+        run: sw_vers
+      - name: Code Checkout
+        uses: actions/checkout@v3
+      - name: Check xcodebuild version
+        run: xcodebuild -version
+      - name: Check xcode embedded SDKs
+        run: xcodebuild -showsdks
+      - name: Show buildable schemes
+        working-directory: ./
+        run: xcodebuild -list
+      - name: Show eligible build destinations
+        working-directory: ./
+        run: xcodebuild -showdestinations -scheme EC2macConnector
+      - name: Build
+        working-directory: ./
+        run: xcodebuild build -scheme EC2macConnector -destination "platform=macOS"
