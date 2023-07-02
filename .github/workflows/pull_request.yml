@@ -9,7 +9,7 @@ on:
       - '**'
 
 env:
-  TOOL_NAME: 'EC2macConnector'
+  SCHEME: 'EC2macConnector'
   XCODE_VERSION: '14.2.0'
 
 jobs:
@@ -23,8 +23,8 @@ jobs:
       - name: Common steps
         uses: ./.github/actions/common_steps
         with:
-          tool-name: ${{ env.TOOL_NAME }}
+          scheme: ${{ env.SCHEME }}
           xcode-version: ${{ env.XCODE_VERSION }}
       - name: Build
         working-directory: ./
-        run: xcodebuild build -scheme EC2macConnector -destination "platform=macOS"
+        run: xcodebuild build -scheme ${{ env.SCHEME }} -destination "platform=macOS"

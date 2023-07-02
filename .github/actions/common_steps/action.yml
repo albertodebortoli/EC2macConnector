@@ -1,7 +1,7 @@
 name: Common steps
 
 inputs:
-  tool-name:
+  scheme:
     required: true
     type: string
   xcode-version:
@@ -29,6 +29,6 @@ runs:
       shell: bash
     - name: Show eligible build destinations
       working-directory: ./
-      run: xcodebuild -showdestinations -scheme ${{ inputs.tool-name }}
+      run: xcodebuild -showdestinations -scheme ${{ inputs.scheme }}
       shell: bash
     
