@@ -13,22 +13,16 @@ runs:
   steps:
     - name: Select Xcode version
       run: sudo xcode-select -s /Applications/Xcode_${{ inputs.xcode-version }}.app/Contents/Developer
-      shell: bash
     - name: Show macOS version
       run: sw_vers
-      shell: bash
     - name: Check xcodebuild version
       run: xcodebuild -version
-      shell: bash
     - name: Check xcode embedded SDKs
       run: xcodebuild -showsdks
-      shell: bash
     - name: Show buildable schemes
       working-directory: ./
       run: xcodebuild -list
-      shell: bash
     - name: Show eligible build destinations
       working-directory: ./
       run: xcodebuild -showdestinations -scheme ${{ inputs.tool-name }}
-      shell: bash
     
