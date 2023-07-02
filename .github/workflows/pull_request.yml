@@ -10,11 +10,11 @@ on:
 
 env:
   SCHEME: 'EC2macConnector'
-  XCODE_VERSION: '14.2.0'
+  XCODE_VERSION: '14.3.0'
 
 jobs:
   build:
-    runs-on: 'macos-12'
+    runs-on: 'macos-13'
     strategy:
       fail-fast: false
     steps:
