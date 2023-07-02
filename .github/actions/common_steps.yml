@@ -1,0 +1,28 @@
+name: Common steps
+
+inputs:
+  tool-name:
+    required: true
+    type: string
+  xcode-version:
+    required: true
+    type: string
+  
+runs:
+  using: "composite"
+  steps:
+    - name: Select Xcode version
+      run: sudo xcode-select -s /Applications/Xcode_${{ inputs.xcode-version }}.app/Contents/Developer
+    - name: Show macOS version
+      run: sw_vers
+    - name: Check xcodebuild version
+      run: xcodebuild -version
+    - name: Check xcode embedded SDKs
+      run: xcodebuild -showsdks
+    - name: Show buildable schemes
+      working-directory: ./
+      run: xcodebuild -list
+    - name: Show eligible build destinations
+      working-directory: ./
+      run: xcodebuild -showdestinations -scheme ${{ inputs.tool-name }}
+    
