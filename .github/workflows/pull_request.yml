@@ -9,6 +9,7 @@ on:
       - '**'
 
 env:
+  TOOL_NAME: 'EC2macConnector'
   XCODE_VERSION: '14.2.0'
 
 jobs:
@@ -17,22 +18,13 @@ jobs:
     strategy:
       fail-fast: false
     steps:
-      - name: Select Xcode version
-        run: sudo xcode-select -s /Applications/Xcode_${{ env.XCODE_VERSION }}.app/Contents/Developer
-      - name: Show macOS version
-        run: sw_vers
       - name: Code Checkout
-        uses: actions/checkout@v3
-      - name: Check xcodebuild version
-        run: xcodebuild -version
-      - name: Check xcode embedded SDKs
-        run: xcodebuild -showsdks
-      - name: Show buildable schemes
-        working-directory: ./
-        run: xcodebuild -list
-      - name: Show eligible build destinations
-        working-directory: ./
-        run: xcodebuild -showdestinations -scheme EC2macConnector
+        uses: actions/checkout@v3  
+      - name: Common steps
+        uses: ./.github/actions/common_steps
+        with:
+          tool-name: ${{ env.TOOL_NAME }}
+          xcode-version: ${{ env.XCODE_VERSION }}
       - name: Build
         working-directory: ./
         run: xcodebuild build -scheme EC2macConnector -destination "platform=macOS"
