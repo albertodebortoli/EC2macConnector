@@ -23,7 +23,6 @@ jobs:
       - name: Common steps
         uses: ./.github/actions/common_steps
         with:
-          scheme: ${{ env.SCHEME }}
           xcode-version: ${{ env.XCODE_VERSION }}
       - name: Build
         working-directory: ./

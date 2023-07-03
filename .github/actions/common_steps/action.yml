@@ -1,9 +1,6 @@
 name: Common steps
 
 inputs:
-  scheme:
-    required: true
-    type: string
   xcode-version:
     required: true
     type: string
@@ -29,6 +26,6 @@ runs:
       shell: bash
     - name: Show eligible build destinations
       working-directory: ./
-      run: xcodebuild -showdestinations -scheme ${{ inputs.scheme }}
+      run: swift build -c debug
       shell: bash
     
