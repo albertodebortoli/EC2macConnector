@@ -16,7 +16,7 @@ and copy the executable to a folder in your `$PATH` such as `/usr/local/bin/`.
 > 
 > Once built, the executable can be found in the `.build` folder, usually at `.build/apple/Products/Release`. 
 
-Alternatively, you can download a release from the [list of releases]().
+Alternatively, you can download a release from the [list of releases](https://github.com/albertodebortoli/EC2macConnector/releases).
 
 
 ## Requirements
