@@ -1,7 +1,6 @@
 //  ConfigurationFacade.swift
 
 import Foundation
-import ANSITerminal
 
 final class ConfigurationFacade {
     
