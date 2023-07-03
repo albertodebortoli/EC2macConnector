@@ -9,21 +9,21 @@ on:
       - '**'
 
 env:
-  SCHEME: 'EC2macConnector'
   XCODE_VERSION: '14.3.0'
 
 jobs:
   build:
+    name: Build for debug
     runs-on: 'macos-13'
     strategy:
       fail-fast: false
     steps:
       - name: Code Checkout
         uses: actions/checkout@v3  
-      - name: Common steps
-        uses: ./.github/actions/common_steps
+      - name: Set Environment
+        uses: ./.github/actions/set_environment
         with:
           xcode-version: ${{ env.XCODE_VERSION }}
       - name: Build
         working-directory: ./
-        run: xcodebuild build -scheme ${{ env.SCHEME }} -destination "platform=macOS"
+        run: swift build -c debug

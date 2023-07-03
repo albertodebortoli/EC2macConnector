@@ -1,4 +1,4 @@
-name: Common steps
+name: Set Environment
 
 inputs:
   xcode-version:
@@ -17,15 +17,3 @@ runs:
     - name: Check xcodebuild version
       run: xcodebuild -version
       shell: bash
-    - name: Check xcode embedded SDKs
-      run: xcodebuild -showsdks
-      shell: bash
-    - name: Show buildable schemes
-      working-directory: ./
-      run: xcodebuild -list
-      shell: bash
-    - name: Show eligible build destinations
-      working-directory: ./
-      run: swift build -c debug
-      shell: bash
-    
