@@ -7,6 +7,7 @@ final class EC2Client {
     private enum FilterName {
         static let type = "instance-type"
         static let state = "instance-state-name"
+        static let fleetIndexTag = "tag:EC2macConnector:FleetIndex"
     }
     
     private enum MacInstanceType: String, CaseIterable {
@@ -40,14 +41,15 @@ final class EC2Client {
             let instanceStateFilter = EC2.Filter(name: FilterName.state, values: states)
             filters.append(instanceStateFilter)
         }
+        let tagFilter = EC2.Filter(name: FilterName.fleetIndexTag, values: ["*"])
+        filters.append(tagFilter)
         let request = EC2.DescribeInstancesRequest(filters: filters, maxResults: 100)
         let result = try await ec2.describeInstances(request)
-        let instances = result
-            .reservations?
+        let reservations = result.reservations ?? []
+        return reservations
             .compactMap { $0.instances }
             .flatMap { $0 }
-            .compactMap { makeInstance(from: $0) } ?? []
-        return instances
+            .compactMap { makeInstance(from: $0) }
             .sorted(by: { $0.fleetIndex < $1.fleetIndex })
     }
     
