@@ -33,7 +33,7 @@ The user must be granted the following permissions:
 
 ### EC2 instances
 
-The EC2 mac instances must have the `EC2macConnector:FleetIndex` tag set to the index of the instance in the fleet. Indexes should start at 1.
+The EC2 Mac instances must have the `EC2macConnector:FleetIndex` tag set to the index of the instance in the fleet. Indexes should start at 1.
 Instances that don't have the said tag will be ignored.
 
 
@@ -43,7 +43,7 @@ EC2macConnector assumes that the private key for each instance key pair is store
 For example, the instance key pair should include an incremental number also part of the corresponding secret ID.
 
 Consider that the number of mac instances in an AWS account is limited and it's convenient to refer to them using an index starting at 1.
-It's good practice for the secret ID to also include a nonce as secrets with the same name cannot be recreated before the deletion period has elapsed, allowing quick provisioning-decommissioning cycles.
+It's good practice for the secret ID to also include a nonce as secrets with the same name cannot be recreated before the deletion period has elapsed, allowing frequent provisioning-decommissioning cycles.
 
 For the above reasons, EC2macConnector assumes the following formats are used:
 
