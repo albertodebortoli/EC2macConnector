@@ -1,6 +1,9 @@
 # EC2macConnector
 
-EC2macConnector is a CLI tool that helps connect to EC2 mac instances easily.
+EC2macConnector is a CLI tool that helps connect to EC2 Mac instances easily.
+
+[Blog post](https://albertodebortoli.com/2023/07/05/easy-connection-to-aws-mac-instances-with-ec2macconnector/)
+
 
 ## Installation
 
